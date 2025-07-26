@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import SearchButton from "./SearchButton";
+import { ShoppingCart, User } from "lucide-react";
 
 export default function Navbar() {
   return (
@@ -9,11 +10,11 @@ export default function Navbar() {
       <nav className="container mx-auto flex justify-between items-center p-4">
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold text-teal-700">
-          MyShop
+          Shopz
         </Link>
 
         {/* Nav Links */}
-        <div className="flex gap-6">
+        <div className="flex gap-6 items-center">
           <Link
             href="/"
             className="text-gray-700 hover:text-teal-700 transition"
@@ -33,6 +34,8 @@ export default function Navbar() {
             Cart
           </Link>
           <SearchButton/>
+          <ShoppingCart />
+          <User />
         </div>
       </nav>
     </header>

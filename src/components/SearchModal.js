@@ -18,11 +18,10 @@ export default function SearchModal({ isOpen, onClose }) {
         `https://dummyjson.com/products/search?q=${query}`
       );
       setResults(response.data.products);
-
       // Add to recent searches
       setRecent((prev) => {
         const updated = [query, ...prev.filter((q) => q !== query)];
-        return updated.slice(0, 5); // keep only last 5
+        return updated.slice(0, 5); 
       });
 
       setQuery("");
@@ -34,7 +33,7 @@ export default function SearchModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-white/30 backdrop-blur-sm z-50">
       <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
         <button
           className="absolute top-4 right-4 text-gray-500"

@@ -17,11 +17,10 @@ export default async function Page({ params, searchParams }) {
     : await getProducts(page, limit);
 
   return (
-    <main className="container mx-auto p-8">
+    <main className="container mx-auto p-8 max-w-7xl">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-3xl font-bold">Product Catalogue - Page {page}</h1>
         <SortControls />
-        <SearchButton/>
       </div>
 
       <Catalogue products={products} />
