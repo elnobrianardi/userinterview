@@ -5,7 +5,6 @@ export async function getProducts(page = 1, limit = 15) {
   const response = await axios.get(
     `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
   );
-  console.log(response.data)
   return response.data;
 }
 
@@ -24,6 +23,5 @@ export async function getSortedProducts({
 
 export const getProductById = async (id) => {
   const { data } = await axios.get(`https://dummyjson.com/products/${id}`);
-  console.log(data)
   return data;
 };

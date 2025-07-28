@@ -1,51 +1,39 @@
-// components/CategoryFilter.jsx
 'use client'
 
-import { useSearchParams, usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-export default function CategoryFilter() {
+export default function CategoryFilter({ selectedCategory, onCategoryChange }) {
   const [categories, setCategories] = useState([]);
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const router = useRouter();
-
-  const selectedCategory = searchParams.get("category");
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const res = await fetch("https://dummyjson.com/products/categories", {
-        cache: "no-store", // 💡 penting
-      });
-      const data = await res.json();
-      setCategories(data);
+      try {
+        const res = await fetch("https://dummyjson.com/products/categories");
+        const data = await res.json();
+        setCategories(data); 
+      } catch (err) {
+        console.error("Failed to fetch categories:", err);
+      }
     };
 
     fetchCategories();
   }, []);
 
-  const handleChange = (e) => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (e.target.value) {
-      params.set("category", e.target.value);
-    } else {
-      params.delete("category");
-    }
-    router.push(`${pathname}?${params.toString()}`);
-  };
-
   return (
-    <select
-      value={selectedCategory || ""}
-      onChange={handleChange}
-      className="border rounded p-2 text-sm"
-    >
-      <option value="">All Categories</option>
-      {categories.map((cat) => (
-        <option key={cat} value={cat}>
-          {cat.charAt(0).toUpperCase() + cat.slice(1)}
-        </option>
-      ))}
-    </select>
+    <div className="my-4">
+      <select
+        id="category"
+        className="p-2 border rounded"
+        value={selectedCategory}
+        onChange={(e) => onCategoryChange(e.target.value)}
+      >
+        <option value="">All Categories</option>
+        {categories.map((category) => (
+          <option key={category.slug} value={category.slug}>
+            {category.name}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 }
