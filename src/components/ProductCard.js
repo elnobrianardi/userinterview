@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function ProductCard({ product }) {
   return (
-    <div className="relative h-80 w-72 rounded overflow-hidden shadow transition-transform duration-300 hover:scale-105 group">
+    <div className="relative h-96 w-80 rounded overflow-hidden shadow transition-transform duration-300 hover:scale-105 group">
       <Link href={`/product/${product.id}`} className="block h-full w-full">
         <div className="absolute inset-0">
           <img
@@ -15,19 +15,24 @@ export default function ProductCard({ product }) {
           <div className="absolute inset-0 bg-black/20" />
         </div>
 
-        {/* Foreground content */}
-        <div className="relative z-10 h-full flex flex-col justify-end p-4">
-          <div className="bg-white/80 p-2 rounded transition-all duration-300 group-hover:pb-12">
+        <div className="relative z-10 h-full flex flex-col justify-end p-4 pointer-events-none">
+          <div className="bg-white/80 p-4 rounded transition-all duration-300 group-hover:pb-12 pointer-events-auto">
             <h2 className="font-bold truncate">{product.title}</h2>
-            <p className="text-gray-600 text-sm">{product.rating} ⭐ <span text-gray-400>({product.reviews.length} reviews)</span></p>
+            <p className="text-gray-600 text-sm">
+              {product.rating} ⭐{" "}
+              <span className="text-gray-400">
+                ({product.reviews.length} reviews)
+              </span>
+            </p>
             <p className="text-lg font-bold">${product.price}</p>
           </div>
         </div>
       </Link>
 
-      {/* Add to Cart Button */}
-      <div className="absolute bottom-4 left-4 z-20 hidden group-hover:block transition-all duration-300">
-        <button className="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700">
+      <div className="absolute bottom-4 left-0 w-full px-4 z-20">
+        <button
+          className="w-full bg-teal-600 text-white px-6 py-2 rounded hover:bg-teal-700 transition-all duration-300 group-hover:opacity-100 opacity-0"
+        >
           Add to Cart
         </button>
       </div>

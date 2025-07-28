@@ -24,5 +24,6 @@ export async function getSortedProducts({
 
 export const getProductById = async (id) => {
   const { data } = await axios.get(`https://dummyjson.com/products/${id}`);
+  console.log(data)
   return data;
 };

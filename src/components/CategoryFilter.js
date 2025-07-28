@@ -1,45 +1,44 @@
-'use client';
+// components/CategoryFilter.jsx
+'use client'
 
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function CategoryFilter() {
   const [categories, setCategories] = useState([]);
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const router = useRouter();
 
-  const current = searchParams.get('category');
+  const selectedCategory = searchParams.get("category");
 
   useEffect(() => {
-    async function fetchCategories() {
-      const res = await fetch('https://dummyjson.com/products/categories');
+    const fetchCategories = async () => {
+      const res = await fetch("https://dummyjson.com/products/categories", {
+        cache: "no-store", // 💡 penting
+      });
       const data = await res.json();
       setCategories(data);
-    }
+    };
 
     fetchCategories();
   }, []);
 
-  function handleChange(e) {
-    const category = e.target.value;
+  const handleChange = (e) => {
     const params = new URLSearchParams(searchParams.toString());
-
-    if (category) {
-      params.set('category', category);
+    if (e.target.value) {
+      params.set("category", e.target.value);
     } else {
-      params.delete('category');
+      params.delete("category");
     }
-
-    router.push(`?${params.toString()}`);
-  }
-
-  if (categories.length === 0) return null;
+    router.push(`${pathname}?${params.toString()}`);
+  };
 
   return (
     <select
+      value={selectedCategory || ""}
       onChange={handleChange}
-      value={current || ''}
-      className="border rounded px-3 py-2"
+      className="border rounded p-2 text-sm"
     >
       <option value="">All Categories</option>
       {categories.map((cat) => (

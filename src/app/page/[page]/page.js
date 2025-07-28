@@ -18,13 +18,15 @@ export default async function Page({ params, searchParams }) {
 
   return (
     <main className="container mx-auto p-8 max-w-7xl">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-3xl font-bold">Product Catalogue - Page {page}</h1>
+      <div className="flex flex-col lg:flex-row justify-between items-center mb-4 max-auto">
+        <h1 className="text-3xl font-bold mb-2 lg:mb-0">Product Catalogue - Page {page}</h1>
         <SortControls />
       </div>
 
-      <Catalogue products={products} />
-      <Pagination currentPage={page} total={total} limit={limit} />
+      <div className="flex flex-col justify-center items-center">
+          <Catalogue products={products} />
+            <Pagination currentPage={page} total={total} limit={limit} />
+      </div>
     </main>
   );
 }
