@@ -18,7 +18,6 @@ export default function SearchModal({ isOpen, onClose }) {
         `https://dummyjson.com/products/search?q=${query}`
       );
       setResults(response.data.products);
-      // Add to recent searches
       setRecent((prev) => {
         const updated = [query, ...prev.filter((q) => q !== query)];
         return updated.slice(0, 5); 

@@ -26,7 +26,6 @@ export default function SortControls() {
 
   return (
     <div className="flex gap-6">
-      {/* Title sort */}
       <div className="flex items-center gap-2">
         <span className="font-semibold">Title</span>
         <button
@@ -45,7 +44,6 @@ export default function SortControls() {
         </button>
       </div>
 
-      {/* Price sort */}
       <div className="flex items-center gap-2">
         <span className="font-semibold">Price</span>
         <button

@@ -8,12 +8,10 @@ export default function Navbar() {
   return (
     <header className="bg-white shadow sticky top-0 z-50">
       <nav className="container mx-auto flex justify-between items-center p-4">
-        {/* Logo */}
         <Link href="/" className="text-2xl font-bold text-teal-700">
           Shopz
         </Link>
 
-        {/* Nav Links */}
         <div className="flex gap-6 items-center">
           <Link
             href="/"
