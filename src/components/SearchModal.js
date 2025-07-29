@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 export default function SearchModal({ isOpen, onClose }) {
   const [query, setQuery] = useState("");
@@ -20,7 +21,7 @@ export default function SearchModal({ isOpen, onClose }) {
       setResults(response.data.products);
       setRecent((prev) => {
         const updated = [query, ...prev.filter((q) => q !== query)];
-        return updated.slice(0, 5); 
+        return updated.slice(0, 5);
       });
 
       setQuery("");
@@ -74,7 +75,15 @@ export default function SearchModal({ isOpen, onClose }) {
             <h3 className="font-semibold mb-2">Results:</h3>
             <ul className="space-y-1 text-sm">
               {results.map((product) => (
-                <li key={product.id}>{product.title}</li>
+                <li key={product.id}>
+                  <Link
+                    href={`/product/${product.id}`}
+                    className="text-teal-700 hover:underline"
+                    onClick={onClose} // Optional: close modal after click
+                  >
+                    {product.title}
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>
