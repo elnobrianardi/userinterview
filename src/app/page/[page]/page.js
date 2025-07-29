@@ -13,7 +13,7 @@ export default async function ProductsPage({ params, searchParams }) {
 
   const sortBy = searchParams?.sort || null
   const order = searchParams?.order || 'asc'
-  const category = searchParams?.category || null
+  const category = searchParams?.category || ''
 
   let productsData = { products: [], total: 0 }
 

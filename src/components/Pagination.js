@@ -13,8 +13,21 @@ export default function Pagination({ currentPage, total, limit }) {
 
   const createPageLink = (page) => {
     const params = new URLSearchParams(currentParams.toString())
-    params.set('page', page)
-    return `?${params.toString()}`
+    return `/page/${page}?${params.toString()}`
+  }
+
+  const visiblePages = 5
+  let startPage = Math.max(1, pageNumber - Math.floor(visiblePages / 2))
+  let endPage = startPage + visiblePages - 1
+
+  if (endPage > totalPages) {
+    endPage = totalPages
+    startPage = Math.max(1, endPage - visiblePages + 1)
+  }
+
+  const pages = []
+  for (let i = startPage; i <= endPage; i++) {
+    pages.push(i)
   }
 
   return (
@@ -24,15 +37,17 @@ export default function Pagination({ currentPage, total, limit }) {
           Prev
         </Link>
       )}
-      {Array.from({ length: totalPages }, (_, i) => (
+
+      {pages.map((page) => (
         <Link
-          key={i}
-          href={createPageLink(i + 1)}
-          className={`px-4 py-2 rounded ${i + 1 === pageNumber ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+          key={page}
+          href={createPageLink(page)}
+          className={`px-4 py-2 rounded ${page === pageNumber ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
         >
-          {i + 1}
+          {page}
         </Link>
       ))}
+
       {nextPage <= totalPages && (
         <Link href={createPageLink(nextPage)} className="px-4 py-2 bg-gray-200 rounded">
           Next

@@ -14,11 +14,12 @@ export default function CategoryFilterWrapper() {
     const params = new URLSearchParams(searchParams.toString())
     if (newCategory) {
       params.set('category', newCategory)
-      params.set('page', 1)
     } else {
       params.delete('category')
     }
-    router.push(`${pathname}?${params.toString()}`)
+
+    // Navigate to /page/1 with category as query
+    router.push(`/page/1?${params.toString()}`)
   }
 
   return (
