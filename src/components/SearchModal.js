@@ -79,7 +79,7 @@ export default function SearchModal({ isOpen, onClose }) {
                   <Link
                     href={`/product/${product.id}`}
                     className="text-teal-700 hover:underline"
-                    onClick={onClose} // Optional: close modal after click
+                    onClick={onClose} 
                   >
                     {product.title}
                   </Link>
